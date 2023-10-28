@@ -46,6 +46,7 @@ def registrar_veiculo(registro: RegistroVeiculo):
 
 @app.get("/registros/")
 def listar_registros(
+    id: int = None,
     marca_veiculo: str = None,
     placa: str = None,
     cliente_nome: str = None,
@@ -56,6 +57,8 @@ def listar_registros(
     resultado = registros
 
     # Filtra os registros com base nos parâmetros passados
+    if id:
+        resultado = [r for r in resultado if r.id == id]
     if marca_veiculo:
         resultado = [r for r in resultado if r.marca_veiculo == marca_veiculo]
     if placa:

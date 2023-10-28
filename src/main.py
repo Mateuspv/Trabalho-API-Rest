@@ -5,6 +5,7 @@ from pydantic import BaseModel
 app = FastAPI()
 
 class RegistroVeiculo(BaseModel):
+    id: int = None
     marca_veiculo: str
     placa: str
     cliente_nome: str
@@ -12,13 +13,21 @@ class RegistroVeiculo(BaseModel):
     horario_chegada: str = None
     horario_saida: str = None
 
+
 registros = []
+id_counter = 1  # Inicialize o contador de ID
+
 @app.get("/")
 def root():
     return {"message": "Status: OK"}
 
 @app.post("/registrar_veiculo/")
 def registrar_veiculo(registro: RegistroVeiculo):
+
+    global id_counter  
+    registro.id = id_counter  
+    id_counter += 1  
+
     horario_atual = datetime.now().strftime("%H:%M")
 
     for r in registros: # Valida se o veículo já saiu da manutenção
@@ -26,7 +35,7 @@ def registrar_veiculo(registro: RegistroVeiculo):
             raise HTTPException(status_code=400, detail="Esse veículo ainda está em manutenção.")
         
     for r in registros: # Valida quando já existe um registro idêntico
-        if r.dict() == registro.model_dump():
+        if r.dict(exclude={"id"}) == registro.model_dump(exclude={"id"}):
             raise HTTPException(status_code=400, detail="Esse registro já existe.")    
         
     if registro.horario_chegada == None:

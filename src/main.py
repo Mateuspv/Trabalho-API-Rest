@@ -19,7 +19,7 @@ def root():
 
 @app.post("/registrar_veiculo/")
 def registrar_veiculo(registro: RegistroVeiculo):
-    horario_atual = datetime.now().strftime("%Y-%m-%d %H:%M:%S")
+    horario_atual = datetime.now().strftime("%H:%M")
 
     for r in registros: # Valida se o veículo já saiu da manutenção
         if r.placa == registro.placa and not r.horario_saida:
@@ -56,8 +56,17 @@ def listar_registros(
     if mecanico_nome:
         resultado = [r for r in resultado if r.mecanico_nome == mecanico_nome]
     if horario_chegada:
-        resultado = [r for r in resultado if r.horario_chegada == horario_chegada]
+        if "e" in horario_chegada:
+            inicio, fim = horario_chegada.split(" e ")
+            resultado = [r for r in resultado if inicio <= r.horario_chegada <= fim]
+        else:
+            resultado = [r for r in resultado if r.horario_chegada == horario_chegada]
+            # É possível usar tanto um parametro específico quanto um período de tempo. Ex: (08:00 e 09:00)
     if horario_saida:
-        resultado = [r for r in resultado if r.horario_saida == horario_saida]
+        if "e" in horario_saida:
+            inicio, fim = horario_saida.split(" e ")
+            resultado = [r for r in resultado if inicio <= r.horario_saida <= fim]
+        else:
+            resultado = [r for r in resultado if r.horario_saida == horario_saida]
 
     return resultado

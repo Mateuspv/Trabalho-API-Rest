@@ -1,7 +1,7 @@
 # Trabalho-API-Rest
 Trabalho de desenvolvimento web sobre API Rest
 
-Ocorreu alguns Problemas na hora de enviar pull request para a branch main, e não conseguimos enviar o pull request, mas caso queira ver oq cada um fez é so ver as branchs separadas de cada pesso que está até que parte cada um fez
+Ocorreu alguns Problemas na hora de enviar pull request para a branch main, e não conseguimos enviar o pull request, mas caso queira ver oq cada um fez é so ver as branchs separadas de cada pessoa que estão as partes que cada um fez
 
 # Registrar Veículo
 Método: POST /registrar_veiculo

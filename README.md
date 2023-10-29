@@ -1,6 +1,8 @@
 # Trabalho-API-Rest
 Trabalho de desenvolvimento web sobre API Rest
 
+Exercicio 3. Alunos: Mateus Veroneze, Jean Trojan e Guilhermy
+
 Ocorreu alguns Problemas na hora de enviar pull request para a branch main, e não conseguimos enviar o pull request, mas caso queira ver oq cada um fez é so ver as branchs separadas de cada pessoa que estão as partes que cada um fez
 
 # Registrar Veículo
